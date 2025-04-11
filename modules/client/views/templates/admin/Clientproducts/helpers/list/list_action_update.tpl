@@ -24,7 +24,7 @@ This template is used to display an update button for a product in the admin pan
             data: {
                 id_product: id,
             },
-            success: function(response) {
+            success: function (response) {
                 try {
                     var result = JSON.parse(response);
                     if (result.success) {
@@ -33,11 +33,11 @@ This template is used to display an update button for a product in the admin pan
                     } else {
                         showErrorMessage(result.errors ? result.errors.join('\n') : '{l s="Error updating product." js=1}');
                     }
-                } catch(e) {
+                } catch (e) {
                     showErrorMessage('{l s="Error parsing response." js=1}');
                 }
             },
-            error: function() {
+            error: function () {
                 showErrorMessage('{l s="An error occurred while updating the product." js=1}');
             }
         });

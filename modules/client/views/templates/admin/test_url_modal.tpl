@@ -78,9 +78,9 @@ It includes a form with fields for the URL, price, description, and stock option
     });
 
 
-     {**
-      *Show the test URL modal
-      *}
+    {**
+     *Show the test URL modal
+     *}
     function showTestUrlPopup() {
         $('#testUrlForm')[0].reset();
         $('#priceResults').hide();
