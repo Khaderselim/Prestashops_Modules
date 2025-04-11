@@ -1,0 +1,32 @@
+# Ignore everything in the root directory
+/*
+!/.gitignore
+# Don't ignore the modules directory itself
+!/modules/
+
+# Ignore everything in the modules directory
+/modules/*
+
+# Don't ignore specific modules
+!/modules/client/
+
+# Common files to ignore in all modules
+/modules/*/config*.xml
+/modules/*/vendor/
+/modules/*/node_modules/
+/modules/*/.env
+/modules/*/*.log
+/modules/*/composer.lock
+/modules/*/package-lock.json
+/modules/*/yarn.lock
+/modules/*/.idea/
+/modules/*/.vscode/
+/modules/*/coverage/
+/modules/*/dist/
+/modules/*/build/
+/modules/*/.DS_Store
+/modules/*/__pycache__/
+/modules/*/*.pyc
+
+# To add another module later, add a line like:
+#!/modules/another-module/
