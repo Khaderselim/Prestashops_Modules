@@ -139,12 +139,12 @@ The competitors' section can be expanded to show more competitors. ( Only shows 
                 });
             });
 
-            /**
+            {**
              * @param priceString
              * @returns {number|string}
              * Extracts numeric value from a price string and formats it to 2 decimal places.
              * Handles various formats including currency symbols and non-breaking spaces.
-             */
+             *}
             function extractNumericPrice(priceString) {
                 // Remove non-breaking spaces and other unexpected characters
                 let cleanedString = priceString.replace(/\s/g, '').replace(/[^\d,.]/g, '');
@@ -160,12 +160,12 @@ The competitors' section can be expanded to show more competitors. ( Only shows 
                 return isNaN(price) ? 0 : price.toFixed(2); // Ensure 2 decimal places
             }
 
-            /**
+            {**
              * @param currentPrice
              * @param previousPrice
              * @returns {number}
              * Calculates the percentage change between two prices.
-             */
+             *}
             function calculatePercentageChange(currentPrice, previousPrice) {
                 const current = extractNumericPrice(currentPrice);
                 const previous = extractNumericPrice(previousPrice);
@@ -198,9 +198,9 @@ The competitors' section can be expanded to show more competitors. ( Only shows 
                 });
             });
 
-            /**
+            {**
              * @description Expands all competitor rows in the table.
-             */
+             *}
             function expandAll() {
                 // Find all show-more buttons
                 const showMoreButtons = document.querySelectorAll('.show-more-btn');

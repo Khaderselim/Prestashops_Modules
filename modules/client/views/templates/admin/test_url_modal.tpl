@@ -77,9 +77,10 @@ It includes a form with fields for the URL, price, description, and stock option
         });
     });
 
-    /**
-     * Show the test URL modal
-     */
+
+     {**
+      *Show the test URL modal
+      *}
     function showTestUrlPopup() {
         $('#testUrlForm')[0].reset();
         $('#priceResults').hide();
@@ -89,9 +90,10 @@ It includes a form with fields for the URL, price, description, and stock option
         $('#testUrlModal').modal('show');
     }
 
-    /**
-     * Test the URL and display the results
-     */
+
+    {**
+     *Test the URL and display the results
+     *}
     function testUrl() {
         const url = $('#test_url').val();
         if (!url) {
@@ -141,13 +143,13 @@ It includes a form with fields for the URL, price, description, and stock option
         });
     }
 
-    /**
+    {**
      * @param {Array} prices - Array of price objects
      * @param {Array} descriptions - Array of description objects
      * @param {Array} stocks - Array of stock objects
      * @param {string} url - The URL being tested
      * Display the price, description and stock status options in the modal
-     */
+     *}
     function displayOptions(prices, descriptions, stocks, url) {
         // Price options
         var priceContainer = $('#radioList');
@@ -254,9 +256,9 @@ It includes a form with fields for the URL, price, description, and stock option
         $('#savePrice').show();
     }
 
-    /**
+    {**
      * Save the selected attributes
-     */
+     *}
     function saveSelectedAttributes() {
         const selectedPrice = $('input[name="price_option"]:checked');
         const selectedDesc = $('input[name="desc_option"]:checked');
