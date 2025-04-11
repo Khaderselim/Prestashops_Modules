@@ -1,3 +1,8 @@
+<!---
+This template is used to display a filter for the catalog in the admin panel.
+It includes a dropdown menu that allows the user to select a specific catalog to filter by.
+The selected catalog will be used to filter the products displayed in the admin panel..
+-->
 <div class="col-lg-6">
     <div class="form-group">
         <label class="control-label col-lg-3">{l s='Filter by Catalog' mod='client'}</label>

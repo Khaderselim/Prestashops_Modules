@@ -1,3 +1,8 @@
+<!---
+This template displays a modal interface for extracting patterns that can be used to extract the details of the competitors' products.
+It allows the user to input a URL and extract its patterns.
+It includes a form with fields for the URL, price, description, and stock options.
+-->
 <div class="modal fade" id="testUrlModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -13,36 +18,34 @@
                     </div>
 
 
-
-
                     <div id="priceResults" class="form-group">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#prices-tab" data-toggle="tab">Prices</a></li>
-                        <li><a href="#description-tab" data-toggle="tab">Description</a></li>
-                        <li><a href="#stock-tab" data-toggle="tab">Stock</a></li>
-                    </ul>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#prices-tab" data-toggle="tab">Prices</a></li>
+                            <li><a href="#description-tab" data-toggle="tab">Description</a></li>
+                            <li><a href="#stock-tab" data-toggle="tab">Stock</a></li>
+                        </ul>
+                        {*The price section*}
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="prices-tab">
+                                <label>Select Price:</label>
+                                <div id="radioList"></div>
+                            </div>
+                            {*The description section*}
+                            <div class="tab-pane" id="description-tab">
+                                <label>Select Description:</label>
+                                <div id="descriptionList"></div>
+                            </div>
+                            {*The stock status section*}
+                            <div class="tab-pane" id="stock-tab">
+                                <label>Select Stock:</label>
+                                <div id="stockList"></div>
+                            </div>
+                        </div>
 
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="prices-tab">
+                        <div id="priceResults" class="form-group" style="display:none;">
                             <label>Select Price:</label>
                             <div id="radioList"></div>
                         </div>
-
-                        <div class="tab-pane" id="description-tab">
-                            <label>Select Description:</label>
-                            <div id="descriptionList"></div>
-                        </div>
-
-                        <div class="tab-pane" id="stock-tab">
-                            <label>Select Stock:</label>
-                            <div id="stockList"></div>
-                        </div>
-                    </div>
-
-                    <div id="priceResults" class="form-group" style="display:none;">
-                        <label>Select Price:</label>
-                        <div id="radioList"></div>
-                    </div>
                 </form>
 
             </div>
@@ -50,26 +53,33 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" onclick="testUrl()">Test</button>
-                <button type="button" class="btn btn-success" id="savePrice" style="display:none;" onclick="saveSelectedAttributes()">Save</button>
+                <button type="button" class="btn btn-success" id="savePrice" style="display:none;"
+                        onclick="saveSelectedAttributes()">Save
+                </button>
             </div>
         </div>
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        $('#client_competitor_form').on('submit', function(e) {
-            if(!{$count} && !$('#test_url').val()) {
+    $(document).ready(function () {
+        $('#client_competitor_form').on('submit', function (e) {
+            // Display the modal if it's a new competitor ( When the form is submitted )
+            if (!{$count} && !$('#test_url').val()) {
                 e.preventDefault();
                 showTestUrlPopup();
                 return false;
             }
-            return true; // Allow form submission when patterns are saved
+            return true;
         });
-        $('#test_url_button').on('click', function(e) {
+        $('#test_url_button').on('click', function (e) {
             e.preventDefault();
             showTestUrlPopup();
         });
     });
+
+    /**
+     * Show the test URL modal
+     */
     function showTestUrlPopup() {
         $('#testUrlForm')[0].reset();
         $('#priceResults').hide();
@@ -79,6 +89,9 @@
         $('#testUrlModal').modal('show');
     }
 
+    /**
+     * Test the URL and display the results
+     */
     function testUrl() {
         const url = $('#test_url').val();
         if (!url) {
@@ -87,14 +100,14 @@
         }
 
         $('#testUrlModal .modal-footer button').prop('disabled', true);
-
+        // Ajax request to test the URL (testUrl() function in the controller)
         $.ajax({
             url: '{$current_url|escape:'javascript':'UTF-8'}&action=test_url',
             method: 'POST',
             data: {
                 url: url,
             },
-            success: function(response) {
+            success: function (response) {
                 try {
                     const result = typeof response === 'string' ? JSON.parse(response) : response;
 
@@ -104,7 +117,7 @@
                     }
 
                     if (result.data) {
-                        displayPriceOptions(
+                        displayOptions(
                             result.data.prices || [],
                             result.data.description || [],
                             result.data.stock || [],
@@ -114,34 +127,42 @@
                         alert('No data found on this page');
                     }
 
-                } catch(e) {
+                } catch (e) {
                     console.error('Parse error:', e);
                     alert('Error processing response');
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 alert('Error testing URL: ' + error);
             },
-            complete: function() {
+            complete: function () {
                 $('#testUrlModal .modal-footer button').prop('disabled', false);
             }
         });
     }
-    function displayPriceOptions(prices, descriptions, stocks, url) {
+
+    /**
+     * @param {Array} prices - Array of price objects
+     * @param {Array} descriptions - Array of description objects
+     * @param {Array} stocks - Array of stock objects
+     * @param {string} url - The URL being tested
+     * Display the price, description and stock status options in the modal
+     */
+    function displayOptions(prices, descriptions, stocks, url) {
         // Price options
         var priceContainer = $('#radioList');
         priceContainer.empty();
 
-        prices.forEach(function(item, index) {
+        prices.forEach(function (item, index) {
             var attributesText = '';
             if (item.attributes) {
                 attributesText = Object.entries(item.attributes)
-                    .map(function(entry) {
+                    .map(function (entry) {
                         return entry[0] + '="' + (Array.isArray(entry[1]) ? entry[1].join(' ') : entry[1]) + '"';
                     })
                     .join(' ');
             }
-
+            // Create the radio button for each price option
             var radioHtml =
                 '<div class="radio">' +
                 '<label>' +
@@ -166,16 +187,16 @@
         var descContainer = $('#descriptionList');
         descContainer.empty();
 
-        descriptions.forEach(function(item, index) {
+        descriptions.forEach(function (item, index) {
             var attributesText = '';
             if (item.attributes) {
                 attributesText = Object.entries(item.attributes)
-                    .map(function(entry) {
+                    .map(function (entry) {
                         return entry[0] + '="' + (Array.isArray(entry[1]) ? entry[1].join(' ') : entry[1]) + '"';
                     })
                     .join(' ');
             }
-
+            // Create the radio button for each description option
             var descHtml =
                 '<div class="radio">' +
                 '<label>' +
@@ -184,7 +205,7 @@
                 'data-tag="' + (item.tag || '') + '" ' +
                 'data-attributes=\'' + JSON.stringify(item.attributes || {}) + '\'>' +
                 '<span class="desc-option">' +
-                '<strong>' + (item.text_content || '')+ '</strong>' +
+                '<strong>' + (item.text_content || '') + '</strong>' +
                 '<small class="text-muted">' +
                 '(Tag: ' + (item.tag || '') +
                 (attributesText ? ' | Attributes: ' + attributesText : '') + ')' +
@@ -198,7 +219,7 @@
         // Stock options
         var stockContainer = $('#stockList');
         stockContainer.empty();
-        stocks.forEach(function(item, index) {
+        stocks.forEach(function (item, index) {
             var attributesText = '';
             if (item.attributes) {
                 attributesText = Object.entries(item.attributes)
@@ -207,6 +228,7 @@
                     })
                     .join(' ');
             }
+            // Create the radio button for each stock option
             var stockhtml =
                 '<div class="radio">' +
                 '<label>' +
@@ -215,7 +237,7 @@
                 'data-tag="' + (item.tag || '') + '" ' +
                 'data-attributes=\'' + JSON.stringify(item.attributes || {}) + '\'>' +
                 '<span class="stock-option">' +
-                '<strong>' + (item.stock || '')+ '</strong>' +
+                '<strong>' + (item.stock || '') + '</strong>' +
                 '<small class="text-muted">' +
                 '(Tag: ' + (item.tag || '') +
                 (attributesText ? ' | Attributes: ' + attributesText : '') + ')' +
@@ -231,6 +253,10 @@
         $('#priceResults').show();
         $('#savePrice').show();
     }
+
+    /**
+     * Save the selected attributes
+     */
     function saveSelectedAttributes() {
         const selectedPrice = $('input[name="price_option"]:checked');
         const selectedDesc = $('input[name="desc_option"]:checked');
@@ -256,6 +282,7 @@
             tag: selectedStock.data('tag'),
             attributes: selectedStock.data('attributes')
         } : null;
+        // Ajax request to save the selected attributes (saveTest() function in the controller)
         $.ajax({
             url: '{$current_url|escape:'javascript':'UTF-8'}&action=save_test',
             method: 'POST',
@@ -265,7 +292,7 @@
                 stock_data: JSON.stringify(stockData),
                 id_competitor: {$current_id|intval}
             },
-            success: function(response) {
+            success: function (response) {
                 try {
                     const data = JSON.parse(response);
                     if (data.success) {
@@ -279,11 +306,11 @@
                     } else {
                         showErrorMessage(data.error || 'Error saving attributes');
                     }
-                } catch(e) {
+                } catch (e) {
                     showErrorMessage('Invalid response from server');
                 }
             },
-            error: function() {
+            error: function () {
                 showErrorMessage('Error communicating with server');
             }
         });
