@@ -128,40 +128,7 @@ BEGIN
                 LIMIT 3
             ) tmp
         );
-    END IF;
-END;';
-
-$sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'client_products_history` (
-    `id_history` int(11) NOT NULL AUTO_INCREMENT,
-    `id_product` int(11) NOT NULL,
-    `old_price` varchar(255) NOT NULL,
-    `new_price` varchar(255) NOT NULL,
-    `date_update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id_history`),
-    KEY `id_product` (`id_product`),
-    CONSTRAINT FOREIGN KEY (`id_product`) REFERENCES `'._DB_PREFIX_.'client_product` (`id_product`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8;';
-
-$sql[] = 'CREATE TRIGGER client_product_price_history
-BEFORE UPDATE ON `'._DB_PREFIX_.'client_product`
-FOR EACH ROW
-BEGIN
-    IF NEW.price != OLD.price THEN
-        INSERT INTO `'._DB_PREFIX_.'client_products_history` (id_product, old_price, new_price)
-        VALUES (OLD.id_product, OLD.price, NEW.price);
-        
-        DELETE FROM `'._DB_PREFIX_.'client_products_history`
-        WHERE id_product = OLD.id_product
-        AND id_history NOT IN (
-            SELECT id_history FROM (
-                SELECT id_history
-                FROM `'._DB_PREFIX_.'client_products_history`
-                WHERE id_product = OLD.id_product
-                ORDER BY date_update DESC
-                LIMIT 3
-            ) tmp
-        );
-    END IF;
+    END IF; 
 END;';
 foreach ($sql as $query) {
     if (Db::getInstance()->execute($query) == false) {

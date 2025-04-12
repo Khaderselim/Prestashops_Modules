@@ -347,7 +347,7 @@ class AdminClientproductsController extends ModuleAdminController
                     if ($descriptionAttributes) {
                         $apiUrl .= '&descr_param=' . urlencode(json_encode($descriptionAttributes));
                     }
-                    if ($stockAttributes) {
+                    if ($stockAttributes && $stockAttributes['tag'] !== 'null' && $stockAttributes['attributes'] !== 'null') {
                         $apiUrl .= '&stock_param=' . urlencode(json_encode($stockAttributes));
                     }
 
@@ -479,7 +479,7 @@ class AdminClientproductsController extends ModuleAdminController
                     if ($descriptionAttributes) {
                         $apiUrl .= '&descr_param=' . urlencode(json_encode($descriptionAttributes));
                     }
-                    if ($stockAttributes) {
+                    if ($stockAttributes && $stockAttributes['tag'] !== 'null' && $stockAttributes['attributes'] !== 'null') {
                         $apiUrl .= '&stock_param=' . urlencode(json_encode($stockAttributes));
                     }
 
@@ -508,7 +508,7 @@ class AdminClientproductsController extends ModuleAdminController
                     if ($descriptionAttributes) {
                         $apiUrl .= '&descr_param=' . urlencode(json_encode($descriptionAttributes));
                     }
-                    if ($stockAttributes) {
+                    if ($stockAttributes && $stockAttributes['tag'] !== 'null' && $stockAttributes['attributes'] !== 'null') {
                         $apiUrl .= '&stock_param=' . urlencode(json_encode($stockAttributes));
                     }
 
@@ -708,7 +708,7 @@ class AdminClientproductsController extends ModuleAdminController
                 if ($descriptionAttributes) {
                     $apiUrl .= '&descr_param=' . urlencode(json_encode($descriptionAttributes));
                 }
-                if ($stockAttributes) {
+                if ($stockAttributes && $stockAttributes['tag'] !== 'null' && $stockAttributes['attributes'] !== 'null') {
                     $apiUrl .= '&stock_param=' . urlencode(json_encode($stockAttributes));
                 }
 
@@ -816,7 +816,7 @@ class AdminClientproductsController extends ModuleAdminController
             if ($descriptionAttributes) {
                 $apiUrl .= '&descr_param=' . urlencode(json_encode($descriptionAttributes));
             }
-            if ($stockAttributes) {
+            if ($stockAttributes && $stockAttributes['tag'] !== 'null' && $stockAttributes['attributes'] !== 'null') {
                 $apiUrl .= '&stock_param=' . urlencode(json_encode($stockAttributes));
             }
 
@@ -909,7 +909,7 @@ class AdminClientproductsController extends ModuleAdminController
                 if ($descriptionAttributes) {
                     $apiUrl .= '&descr_param=' . urlencode(json_encode($descriptionAttributes));
                 }
-                if ($stockAttributes) {
+                if ($stockAttributes && $stockAttributes['tag'] !== 'null' && $stockAttributes['attributes'] !== 'null') {
                     $apiUrl .= '&stock_param=' . urlencode(json_encode($stockAttributes));
                 }
 

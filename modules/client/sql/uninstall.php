@@ -33,11 +33,9 @@ $sql = array();
 
 // First drop triggers since they depend on tables
 $sql[] = 'DROP TRIGGER IF EXISTS competitor_product_price_history;';
-$sql[] = 'DROP TRIGGER IF EXISTS client_product_price_history;';
 
 // Drop relation table first since it references other tables
 $sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'products_relation`';
-$sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'client_products_history`';
 $sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'competitor_products_history`';
 // Drop dependent tables
 $sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'competitor_price_description`';

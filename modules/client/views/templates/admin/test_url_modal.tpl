@@ -230,6 +230,7 @@ It includes a form with fields for the URL, price, description, and stock option
                     })
                     .join(' ');
             }
+
             // Create the radio button for each stock option
             var stockhtml =
                 '<div class="radio">' +

@@ -54,7 +54,7 @@ The competitors' section can be expanded to show more competitors. ( Only shows 
                                 <td class="fixed-width-xxl"><a href="{$competitor.url|escape:'html':'UTF-8'}"
                                                                target="_blank">{$competitor.name|escape:'html':'UTF-8'}</a>
                                 </td>
-                                <td class="fixed-width-md">{$competitor.price|escape:'html':'UTF-8'}</td>
+                                <td class="fixed-width-lg">{$competitor.price|escape:'html':'UTF-8'}</td>
                                 <td class="fixed-width-sm">
                                     {if isset($competitor.new_price) && isset($competitor.old_price)}
                                         <span class="percentage-change"
@@ -66,7 +66,12 @@ The competitors' section can be expanded to show more competitors. ( Only shows 
                                     {/if}
 
                                 </td>
-                                <td>{$competitor.stock}</td>
+                                <td>{if isset($competitor.stock) && $competitor.stock != ''}
+                                        <span >{$competitor.stock}</span>
+                                    {else}
+                                        <span class="label label-danger">N/A</span>
+                                    {/if}
+                                    </td>
                                 <td>
                                     {if isset($competitor.price) && isset($competitor.client_price)}
                                         <span class="percentage-change"

@@ -433,9 +433,9 @@ class AdminClientCompetitorsController extends ModuleAdminController
                 throw new Exception('Missing description tag or attributes');
             }
 
-            if (!isset($stockData['tag']) || !isset($stockData['attributes'])) {
-                throw new Exception('Missing stock tag or attributes');
-            }
+//            if (!isset($stockData['tag']) || !isset($stockData['attributes'])) {
+//                throw new Exception('Missing stock tag or attributes');
+//            }
 
             // Delete existing record
             Db::getInstance()->execute('
@@ -450,7 +450,7 @@ class AdminClientCompetitorsController extends ModuleAdminController
                 'price_attribute' => pSQL(json_encode($priceData['attributes'])),
                 'description_tag' => pSQL($descriptionData['tag']),
                 'description_attribute' => pSQL(json_encode($descriptionData['attributes'])),
-                'stock_tag' => pSQL($stockData['tag']),
+                'stock_tag' => pSQL(json_encode($stockData['tag'])),
                 'stock_attribute' => pSQL(json_encode($stockData['attributes']))
             ]);
 
