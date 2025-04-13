@@ -336,9 +336,9 @@ class AdminClientproductsController extends ModuleAdminController
                 );
                 // Get the competitor search pattern and prepare the api request
                 if ($id_competitor) {
-                    $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$id_competitor);
-                    $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$id_competitor);
-                    $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$id_competitor);
+                    $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$id_competitor);
+                    $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$id_competitor);
+                    $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$id_competitor);
 
                     $apiUrl = 'http://localhost:8000/api/extract-price?url=' . urlencode($competitor['url']);
                     if ($priceAttributes) {
@@ -468,9 +468,9 @@ class AdminClientproductsController extends ModuleAdminController
                 );
                 // Get the competitor search pattern and prepare the api request
                 if ($existing_product) {
-                    $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$existing_product['id_competitor']);
-                    $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$existing_product['id_competitor']);
-                    $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$existing_product['id_competitor']);
+                    $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$existing_product['id_competitor']);
+                    $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$existing_product['id_competitor']);
+                    $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$existing_product['id_competitor']);
 
                     $apiUrl = 'http://localhost:8000/api/extract-price?url=' . urlencode($competitor['url']);
                     if ($priceAttributes) {
@@ -497,9 +497,9 @@ class AdminClientproductsController extends ModuleAdminController
                 );
                 // Get the competitor search pattern and prepare the api request
                 if ($id_competitor) {
-                    $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$id_competitor);
-                    $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$id_competitor);
-                    $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$id_competitor);
+                    $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$id_competitor);
+                    $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$id_competitor);
+                    $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$id_competitor);
 
                     $apiUrl = 'http://localhost:8000/api/extract-price?url=' . urlencode($competitor['url']);
                     if ($priceAttributes) {
@@ -697,9 +697,9 @@ class AdminClientproductsController extends ModuleAdminController
 
             // Get the competitor search pattern and prepare the api requests
             foreach ($competitor_products as $cp) {
-                $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$cp['id_competitor']);
-                $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$cp['id_competitor']);
-                $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$cp['id_competitor']);
+                $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$cp['id_competitor']);
+                $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$cp['id_competitor']);
+                $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$cp['id_competitor']);
 
                 $apiUrl = 'http://localhost:8000/api/extract-price?url=' . urlencode($cp['url']);
                 if ($priceAttributes) {
@@ -805,9 +805,9 @@ class AdminClientproductsController extends ModuleAdminController
 
         // Add competitor requests
         foreach ($competitor_products as $key => $cp) {
-            $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$cp['id_competitor']);
-            $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$cp['id_competitor']);
-            $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$cp['id_competitor']);
+            $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$cp['id_competitor']);
+            $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$cp['id_competitor']);
+            $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$cp['id_competitor']);
 
             $apiUrl = 'http://localhost:8000/api/extract-price?url=' . urlencode($cp['url']);
             if ($priceAttributes) {
@@ -898,9 +898,9 @@ class AdminClientproductsController extends ModuleAdminController
             // Prepare competitor API requests
             $competitorRequests = [];
             foreach ($competitor_products as $cp) {
-                $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$cp['id_competitor']);
-                $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$cp['id_competitor']);
-                $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_price_description` WHERE id_competitor = ' . (int)$cp['id_competitor']);
+                $priceAttributes = Db::getInstance()->getRow('SELECT price_tag AS tag, price_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$cp['id_competitor']);
+                $descriptionAttributes = Db::getInstance()->getRow('SELECT description_tag AS tag, description_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$cp['id_competitor']);
+                $stockAttributes = Db::getInstance()->getRow('SELECT stock_tag AS tag, stock_attribute AS attributes FROM `' . _DB_PREFIX_ . 'competitor_pattern` WHERE id_competitor = ' . (int)$cp['id_competitor']);
 
                 $apiUrl = 'http://localhost:8000/api/extract-price?url=' . urlencode($cp['url']);
                 if ($priceAttributes) {

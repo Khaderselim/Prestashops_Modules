@@ -178,7 +178,7 @@ class AdminClientCompetitorsController extends ModuleAdminController
             ),
             'buttons' => array(
                 array(
-                    'title' => $this->l('Test URL'),
+                    'title' => $this->l('Update Pattern'),
                     'class' => 'btn btn-default pull-right',
                     'icon' => 'process-icon-test',
                     'id' => 'test_url_button'
@@ -186,7 +186,7 @@ class AdminClientCompetitorsController extends ModuleAdminController
             ) // A button to test, add or edit the pattern
         );
         // Check if we are editing an existing competitor
-        $existing_relation = Db::getInstance()->getRow('SELECT COUNT(*) AS COUNT FROM ' . _DB_PREFIX_ . 'competitor_price_description WHERE id_competitor = ' . (int)Tools::getValue('id_client_competitor'));
+        $existing_relation = Db::getInstance()->getRow('SELECT COUNT(*) AS COUNT FROM ' . _DB_PREFIX_ . 'competitor_pattern WHERE id_competitor = ' . (int)Tools::getValue('id_client_competitor'));
         // Assign the current ID and count to the template
         $this->context->smarty->assign([
             'current_id' => Tools::getValue('id_client_competitor'),
@@ -230,7 +230,7 @@ class AdminClientCompetitorsController extends ModuleAdminController
                 $descriptionData = json_decode($this->context->cookie->description_pattern, true);
                 $stockData = json_decode($this->context->cookie->stock_pattern, true);
 
-                Db::getInstance()->insert('competitor_price_description', [
+                Db::getInstance()->insert('competitor_pattern', [
                     'id_competitor' => (int)$object->id, // Use correct ID field
                     'price_tag' => pSQL($priceData['tag']),
                     'price_attribute' => pSQL(json_encode($priceData['attributes'])),
@@ -439,12 +439,12 @@ class AdminClientCompetitorsController extends ModuleAdminController
 
             // Delete existing record
             Db::getInstance()->execute('
-                DELETE FROM ' . _DB_PREFIX_ . 'competitor_price_description
+                DELETE FROM ' . _DB_PREFIX_ . 'competitor_pattern
                 WHERE id_competitor = ' . (int)$id_competitor
             );
 
             // Insert new record
-            $result = Db::getInstance()->insert('competitor_price_description', [
+            $result = Db::getInstance()->insert('competitor_pattern', [
                 'id_competitor' => (int)$id_competitor,
                 'price_tag' => pSQL($priceData['tag']),
                 'price_attribute' => pSQL(json_encode($priceData['attributes'])),

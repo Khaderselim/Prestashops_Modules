@@ -34,15 +34,14 @@ $sql = array();
 // First drop triggers since they depend on tables
 $sql[] = 'DROP TRIGGER IF EXISTS competitor_product_price_history;';
 
-// Drop relation table first since it references other tables
-$sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'products_relation`';
+// First drop tables with foreign key dependencies
 $sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'competitor_products_history`';
-// Drop dependent tables
-$sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'competitor_price_description`';
-$sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'client_product`';
+$sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'products_relation`';
+$sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'competitor_pattern`';
 $sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'competitor_product`';
+$sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'client_product`';
 
-// Drop base tables last
+// Drop base tables last since they are referenced by other tables
 $sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'client_competitor`';
 $sql[] = 'DROP TABLE IF EXISTS `'._DB_PREFIX_.'client_catalog`';
 

@@ -43,7 +43,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'client_catalog` (
     UNIQUE KEY `name` (`name`)
 ) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8;';
 
-$sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'competitor_price_description` (
+$sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'competitor_pattern` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `id_competitor` int(11) NOT NULL,
     `price_tag` varchar(50) NOT NULL,

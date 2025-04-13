@@ -46,7 +46,7 @@ class Client extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('Competitor');
+        $this->displayName = $this->l('Product Tracking');
         $this->description = $this->l('Tracking similar products');
 
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => '8.0');
