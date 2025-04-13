@@ -433,9 +433,6 @@ class AdminClientCompetitorsController extends ModuleAdminController
                 throw new Exception('Missing description tag or attributes');
             }
 
-//            if (!isset($stockData['tag']) || !isset($stockData['attributes'])) {
-//                throw new Exception('Missing stock tag or attributes');
-//            }
 
             // Delete existing record
             Db::getInstance()->execute('
