@@ -313,7 +313,7 @@ class AdminClientproductsController extends ModuleAdminController
         //Get the product name from the form
         $product_name = Tools::getValue('search');
         //Get the product data from the database
-        $db_product = Db::getInstance()->getRow("SELECT * FROM " . _DB_PREFIX_ . "target_product WHERE name = '" . pSQL($product_name) . "'");
+        $db_product = Db::getInstance()->getRow("SELECT * FROM " . _DB_PREFIX_ . "target_product WHERE name = '" . pSQL($product_name) . "'"); // Change the table name to your target product table
 
         // Create API requests array
         $apiRequests = [];
@@ -361,10 +361,10 @@ class AdminClientproductsController extends ModuleAdminController
         // Process main product result
 
         $main_product = new ClientProduct();
-        $main_product->name = $db_product['name'];
-        $main_product->url = $db_product['url'];
-        $main_product->price = $db_product['price'];
-        $main_product->description = '';
+        $main_product->name = $db_product['name']; // Get the name from the database
+        $main_product->url = $db_product['url']; // Get the URL from the database
+        $main_product->price = $db_product['price']; // Get the price from the database
+        $main_product->description = ''; // Get the description from the database
         $main_product->id_client_catalog = (int)$maincategory;
         if (!$main_product->add()) {
             $this->errors[] = $this->l('Failed to save client product');
@@ -522,10 +522,10 @@ class AdminClientproductsController extends ModuleAdminController
         // Process main product result
         if ($main_product->name != Tools::getValue('search')) {
             $main_product->name = Tools::getValue('search');
-            $db_product = Db::getInstance()->getRow("SELECT * FROM " . _DB_PREFIX_ . "target_product WHERE name = '" . pSQL($main_product->name) . "'");
-            $main_product->url = $db_product['url'];
-            $main_product->price = $db_product['price'];
-            $main_product->description = '';
+            $db_product = Db::getInstance()->getRow("SELECT * FROM " . _DB_PREFIX_ . "target_product WHERE name = '" . pSQL($main_product->name) . "'"); // Change the table name to your target product table
+            $main_product->url = $db_product['url']; // Get the URL from the database
+            $main_product->price = $db_product['price']; // Get the price from the database
+            $main_product->description = ''; //Get the description from the database
             if (!$main_product->update()) {
                 $this->errors[] = $this->l('Failed to update client product');
                 return false;
