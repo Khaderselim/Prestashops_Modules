@@ -4,7 +4,6 @@ require_once _PS_MODULE_DIR_ . 'client/classes/ClientProduct.php';
 require_once _PS_MODULE_DIR_ . 'client/classes/Products_relation.php';
 require_once _PS_MODULE_DIR_ . 'client/classes/CompetitorProduct.php';
 require_once _PS_MODULE_DIR_ . 'client/classes/ClientCatalog.php';
-require_once _PS_MODULE_DIR_ . 'client/classes/TargetProduct.php';
 
 class AdminClientproductsController extends ModuleAdminController
 {
