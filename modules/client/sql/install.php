@@ -50,7 +50,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'competitor_pattern` (
     `price_attribute` text NOT NULL,
     `description_tag` varchar(50) NOT NULL,
     `description_attribute` text,
-    `stock_tag` varchar(50) NOT NULL,
+    `stock_tag` varchar(50),
     `stock_attribute` text,
     PRIMARY KEY (`id`),
     KEY `id_competitor` (`id_competitor`),
