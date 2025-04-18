@@ -9,6 +9,7 @@
 
 # Don't ignore specific modules
 !/modules/client/
+!/modules/target_tracking
 
 # Common files to ignore in all modules
 /modules/*/config*.xml
