@@ -19,7 +19,7 @@ class AdminTargetTrackingCompetitorsController extends ModuleAdminController{
         $this->orderBy = 'id_target_competitor';
         $this->orderWay = 'ASC';
         $this->list_no_link = true;
-        $this->apiConfig= require_once _PS_MODULE_DIR_ . 'client/config/api.php';
+        $this->apiConfig= require_once _PS_MODULE_DIR_ . 'target_tracking/config/api.php';
 
         parent::__construct();
 

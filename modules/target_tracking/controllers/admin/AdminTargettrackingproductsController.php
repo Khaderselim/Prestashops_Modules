@@ -23,7 +23,7 @@ class AdminTargettrackingproductsController extends ModuleAdminController
         $this->orderWay = 'ASC';
         $this->list_no_link = true; // Disable default link to edit product
         $this->_where = 'AND a.id_target_website ='.(int)Tools::getValue('id_target_website'); //Select only products for the current target website
-        $this->apiConfig = require_once _PS_MODULE_DIR_.'client/config/api.php';
+        $this->apiConfig = require_once _PS_MODULE_DIR_.'target_tracking/config/api.php';
         parent::__construct();
         // Declare the fields for the list of products
         $this->fields_list = array(
@@ -879,7 +879,7 @@ class AdminTargettrackingproductsController extends ModuleAdminController
 
         if (strlen($query) >= 3) {
             $products = Db::getInstance()->executeS('
-                SELECT 
+                SELECT DISTINCT 
                     prl.name, 
                     pr.price,
                     pr.id_product,
