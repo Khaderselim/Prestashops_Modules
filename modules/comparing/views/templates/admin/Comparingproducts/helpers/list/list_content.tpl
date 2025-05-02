@@ -28,6 +28,7 @@
                         <tr>
                             <th>Logo</th>
                             <th>Competitor</th>
+                            <th class="fixed-width-sm">Brands</th>
                             <th class="fixed-width-md">Price</th>
                             <th>Similarity</th>
                         </tr>
@@ -43,6 +44,11 @@
                                 </td>
                                 <td>
                                     <a href="{$competitor.url|escape:'html':'UTF-8'}" target="_blank">{$competitor.name|escape:'html':'UTF-8'}</a>
+                                </td>
+                                <td>
+                                    {if $competitor.competitor_product_brands}
+                                        {$competitor.competitor_product_brands|escape:'html':'UTF-8'}
+                                    {/if}
                                 </td>
                                 <td>
                                     <div>{$competitor.price|escape:'html':'UTF-8'}</div>

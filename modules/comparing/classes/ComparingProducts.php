@@ -5,6 +5,8 @@ class ComparingProducts extends ObjectModel{
     public $id_comparing_product;
     public $id_product;
     public $id_competitor_product;
+    public $product_brands;
+    public $competitor_product_brands;
     public $similarity;
     public static $definition = array(
         'table' => 'comparing_product',
@@ -12,6 +14,8 @@ class ComparingProducts extends ObjectModel{
         'fields' => array(
             'id_product' => array('type' => self::TYPE_INT, 'validate' => 'isInt', 'required' => true),
             'id_competitor_product' => array('type' => self::TYPE_INT, 'validate' => 'isInt', 'required' => true),
+            'product_brands' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
+            'competitor_product_brands' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
             'similarity' => array('type' => self::TYPE_FLOAT, 'validate' => 'isFloat', 'required' => true),
         )
     );

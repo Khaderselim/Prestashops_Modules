@@ -34,6 +34,11 @@ class AdminComparingproductsController extends ModuleAdminController{
                 'width' => 'auto',
                 'align' => 'left',
             ),
+            'product_brands' => array(
+                'title' => $this->l('Brands'),
+                'width' => 'auto',
+                'align' => 'left',
+            ),
             'price' => array(
                 'title' => $this->l('Price'),
                 'width' => 'auto',
