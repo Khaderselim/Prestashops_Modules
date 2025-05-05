@@ -231,7 +231,7 @@ class AdminTargettrackingproductsController extends ModuleAdminController
         $currency = Currency::getDefaultCurrency();
         $iso_code = $currency->iso_code; // Get the currency code
         //Get the product data from the database
-        $db_product = Db::getInstance()->getRow("SELECT prl.name, prl.description, pr.price, i.id_image
+        $db_product = Db::getInstance()->getRow("SELECT prl.name, prl.description,pr.id_product, pr.price, i.id_image
             FROM " . _DB_PREFIX_ . "product pr
             LEFT JOIN " . _DB_PREFIX_ . "product_lang prl ON prl.id_product = pr.id_product
             LEFT JOIN " . _DB_PREFIX_ . "image i ON i.id_product = pr.id_product AND i.cover = 1
@@ -279,6 +279,7 @@ class AdminTargettrackingproductsController extends ModuleAdminController
         // Process main product result
         $main_product = new TargetsProduct();
         $main_product->name = $db_product['name'];
+        $main_product->id_product = $db_product['id_product'];
         $main_product->img_url = Context::getContext()->link->getImageLink($db_product['name'],$db_product['id_image']); // Get the image URL from the database
         $main_product->price = number_format((float)$db_product['price'],3,',',' ').' '.$iso_code; // Get the price from the database
         $main_product->description = $db_product['description']; // Get the description from the database
@@ -355,13 +356,14 @@ class AdminTargettrackingproductsController extends ModuleAdminController
     // Process main product result
     if ($main_product->name != Tools::getValue('search')) {
         $main_product->name = Tools::getValue('search');
-        $db_product = Db::getInstance()->getRow("SELECT prl.name, prl.description, pr.price, i.id_image 
+        $db_product = Db::getInstance()->getRow("SELECT prl.name, prl.description,pr.id_product, pr.price, i.id_image 
             FROM " . _DB_PREFIX_ . "product pr
             LEFT JOIN " . _DB_PREFIX_ . "product_lang prl ON prl.id_product = pr.id_product 
             LEFT JOIN " . _DB_PREFIX_ . "image i ON i.id_product = pr.id_product AND i.cover = 1
             WHERE prl.name = '" . pSQL($main_product->name) . "'"); // Change the table name to your target product table
         $main_product->price = number_format((float)$db_product['price'],3,',',' ').' '.$iso_code; // Get the price from the database
         $main_product->description = $db_product['description']; //Get the description from the database
+        $main_product->id_product = $db_product['id_product']; // Get the product ID from the database
         $main_product->img_url = Context::getContext()->link->getImageLink($db_product['name'],$db_product['id_image']); // Get the image URL from the database
         if (!$main_product->update()) {
             $this->errors[] = $this->l('Failed to update client product');
