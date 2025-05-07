@@ -115,6 +115,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'target_products_relatio
     `id_product_competitor` int(11) NOT NULL,
     `id_product_target` int(11) NOT NULL,
     PRIMARY KEY (`id`),
+    UNIQUE KEY `unique_product_relation` (`id_product_competitor`, `id_product_target`),
     FOREIGN KEY (`id_product_competitor`) REFERENCES `' . _DB_PREFIX_ . 'target_competitor_product` (`id_product`) ON DELETE CASCADE,
     FOREIGN KEY (`id_product_target`) REFERENCES `' . _DB_PREFIX_ . 'targets_products` (`id_target_product`) ON DELETE CASCADE
 ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';

@@ -27,7 +27,10 @@
 $sql = array();
 $sql[] = 'DROP TRIGGER IF EXISTS `'._DB_PREFIX_.'delete_comparing_product_competitor`;';
 $sql[] = 'DROP TRIGGER IF EXISTS `'._DB_PREFIX_.'delete_comparing_product_main`;';
+$sql[] = 'DROP TRIGGER IF EXISTS `'._DB_PREFIX_.'delete_from_suggestion_after_compare_insert`;';
+$sql[] = 'DROP TRIGGER IF EXISTS `'._DB_PREFIX_.'delete_from_suggestion_after_compare_insert`;';
 $sql[] = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'comparing_product`';
+$sql[] = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'suggestion_product`';
 
 
 foreach ($sql as $query) {

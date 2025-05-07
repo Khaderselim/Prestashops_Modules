@@ -37,12 +37,25 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'comparing_product` (
     UNIQUE KEY `unique_comparison` (`id_product`, `id_competitor_product`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;';
 
+$sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'suggestion_product` (
+    `id_suggestion_product` int(11) NOT NULL AUTO_INCREMENT,
+    `id_product` int(11) NOT NULL,
+    `product_brands` varchar(255) NOT NULL,
+    `competitor_product_brands` varchar(255) NOT NULL,
+    `id_competitor_product` int(11) NOT NULL,
+    `similarity` float NOT NULL,
+    PRIMARY KEY (`id_suggestion_product`),
+    UNIQUE KEY `unique_comparison` (`id_product`, `id_competitor_product`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;';
+
 $sql[] = 'DROP TRIGGER IF EXISTS `'._DB_PREFIX_.'delete_comparing_product_competitor`;';
 $sql[] = 'CREATE TRIGGER `'._DB_PREFIX_.'delete_comparing_product_competitor` 
     AFTER DELETE ON `'._DB_PREFIX_.'target_competitor_product`
     FOR EACH ROW 
     BEGIN
         DELETE FROM `'._DB_PREFIX_.'comparing_product` 
+        WHERE id_competitor_product = OLD.id_product;
+        DELETE FROM `'._DB_PREFIX_.'suggestion_product` 
         WHERE id_competitor_product = OLD.id_product;
     END;';
 
@@ -53,7 +66,19 @@ $sql[] = 'CREATE TRIGGER `'._DB_PREFIX_.'delete_comparing_product_main`
     BEGIN
         DELETE FROM `'._DB_PREFIX_.'comparing_product` 
         WHERE id_product = OLD.id_product;
+        DELETE FROM `'._DB_PREFIX_.'suggestion_product` 
+        WHERE id_product = OLD.id_product;
     END;';
+
+$sql[] = 'CREATE TRIGGER '._DB_PREFIX_.'delete_from_suggestion_after_compare_insert
+    AFTER INSERT ON `'._DB_PREFIX_.'comparing_product`
+    FOR EACH ROW
+BEGIN
+    DELETE FROM `'._DB_PREFIX_.'suggestion_product`
+    WHERE id_product = NEW.id_product
+      AND id_competitor_product = NEW.id_competitor_product;
+END;';
+
 
 foreach ($sql as $query) {
     if (Db::getInstance()->execute($query) == false) {

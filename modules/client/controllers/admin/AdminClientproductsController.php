@@ -21,7 +21,7 @@ class AdminClientproductsController extends ModuleAdminController
         $this->table = 'client_product';
         $this->className = 'ClientProduct';
         $this->lang = false;
-        $this->identifier = 'id_product';
+        $this->identifier = 'id_client_product';
 
         $this->list_no_link = true; // Disable default link to edit product
         $this->apiConfig = require_once _PS_MODULE_DIR_.'client/config/api.php';
@@ -43,11 +43,11 @@ class AdminClientproductsController extends ModuleAdminController
         );
         // Declaration of the fields for the list
         $this->fields_list = array(
-            'id_product' => array(
+            'id_client_product' => array(
                 'title' => $this->l('ID'),
                 'align' => 'center',
                 'class' => 'fixed-width-xs',
-                'filter_key' => 'a!id_product'
+                'filter_key' => 'a!id_client_product'
             ),
             'image' => array(
                 'title' => $this->l('Image'),
@@ -242,7 +242,7 @@ class AdminClientproductsController extends ModuleAdminController
     public function displayUpdateLink($token, $id, $name)
     {
         // Create a template for the update link
-        $tpl = $this->createTemplate('Clientproducts/helpers/list/list_action_update.tpl');
+        $tpl = $this->createTemplate('clientproducts/helpers/list/list_action_update.tpl');
         // Assign the variables to the template
         $tpl->assign([
             'href' => $this->context->link->getAdminLink('AdminClientproducts'),
@@ -310,7 +310,7 @@ class AdminClientproductsController extends ModuleAdminController
         //Get the product data from the database
         $currency = Currency::getDefaultCurrency();
         $iso_code = $currency->iso_code; // Get the currency code
-        $db_product = Db::getInstance()->getRow("SELECT prl.name, prl.description, pr.price, i.id_image
+        $db_product = Db::getInstance()->getRow("SELECT prl.name, prl.description, pr.id_product, pr.price, i.id_image
             FROM " . _DB_PREFIX_ . "product pr
             LEFT JOIN " . _DB_PREFIX_ . "product_lang prl ON prl.id_product = pr.id_product
             LEFT JOIN " . _DB_PREFIX_ . "image i ON i.id_product = pr.id_product AND i.cover = 1
@@ -365,6 +365,7 @@ class AdminClientproductsController extends ModuleAdminController
         $main_product->img_url = Context::getContext()->link->getImageLink($db_product['name'],$db_product['id_image']); // Get the image URL from the database
         $main_product->price = number_format((float)$db_product['price'],3,',',' ').' '.$iso_code; // Get the price from the database
         $main_product->description = $db_product['description']; // Get the description from the database
+        $main_product->id_product = $db_product['id_product'];
         $main_product->id_client_catalog = (int)$maincategory;
         if (!$main_product->add()) {
             $this->errors[] = $this->l('Failed to save client product');
@@ -524,7 +525,7 @@ class AdminClientproductsController extends ModuleAdminController
         // Process main product result
         if ($main_product->name != Tools::getValue('search')) {
             $main_product->name = Tools::getValue('search');
-            $db_product = Db::getInstance()->getRow("SELECT prl.name, prl.description, pr.price, i.id_image 
+            $db_product = Db::getInstance()->getRow("SELECT prl.name, prl.description, pr.id_product, pr.price, i.id_image 
             FROM " . _DB_PREFIX_ . "product pr
             LEFT JOIN " . _DB_PREFIX_ . "product_lang prl ON prl.id_product = pr.id_product 
             LEFT JOIN " . _DB_PREFIX_ . "image i ON i.id_product = pr.id_product AND i.cover = 1
@@ -532,6 +533,7 @@ class AdminClientproductsController extends ModuleAdminController
 //            $main_product->url = $db_product['url']; // Get the URL from the database
             $main_product->price = number_format((float)$db_product['price'],3,',',' ').' '.$iso_code; // Get the price from the database
             $main_product->description = $db_product['description']; //Get the description from the database
+            $main_product->id_product = $db_product['id_product']; // Get the product ID from the database
             $main_product->img_url = Context::getContext()->link->getImageLink($db_product['name'],$db_product['id_image']); // Get the image URL from the database
             if (!$main_product->update()) {
                 $this->errors[] = $this->l('Failed to update client product');
@@ -1078,7 +1080,7 @@ class AdminClientproductsController extends ModuleAdminController
 
         if (strlen($query) >= 3) {
             $products = Db::getInstance()->executeS('
-                SELECT 
+                SELECT DISTINCT 
                     prl.name, 
                     pr.price,
                     pr.id_product,
