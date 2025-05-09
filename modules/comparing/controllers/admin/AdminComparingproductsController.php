@@ -224,7 +224,7 @@ class AdminComparingproductsController extends ModuleAdminController{
             DELETE sp FROM '._DB_PREFIX_.'suggestion_product sp
             INNER JOIN '._DB_PREFIX_.'comparing_product cp
             ON sp.id_product = cp.id_product
-            AND sp.id_competitor_product = cp.id_competitor_product
+            WHERE sp.id_competitor_product = cp.id_competitor_product
         ');
 
         Tools::redirectAdmin(self::$currentIndex.'&token='.$this->token);

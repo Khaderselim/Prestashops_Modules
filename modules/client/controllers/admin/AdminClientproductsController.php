@@ -59,6 +59,7 @@ class AdminClientproductsController extends ModuleAdminController
             'name' => array(
                 'title' => $this->l('Product'),
                 'align' => 'left',
+                'callback' => 'displayName',
                 'filter_key' => 'a!name',
                 'class' => 'fixed-width-xxl',
             ),
@@ -229,6 +230,13 @@ class AdminClientproductsController extends ModuleAdminController
 
 
         return parent::renderForm();
+    }
+
+    public function DisplayName($value, $row)
+    {
+        $product_link = Context::getContext()->link->getProductLink($row['id_product']);
+        return '<a href="' . $product_link . '" target="_blank">' . $value . '</a>';
+
     }
 
     /**

@@ -525,9 +525,11 @@ class AdminTargettrackingproductsController extends ModuleAdminController
 
     Tools::redirectAdmin(self::$currentIndex.'&conf=4&token='.$this->token.'&id_target_website='.(int)$main_product->id_target_website);
 }
-    public function displayName($value, $row){
-        $html = '<a href="'.$row['url'].'" target="_blank">'.$value.'</a>';
-        return $html;
+    public function DisplayName($value, $row)
+    {
+        $product_link = Context::getContext()->link->getProductLink($row['id_product']);
+        return '<a href="' . $product_link . '" target="_blank">' . $value . '</a>';
+
     }
 
     /**

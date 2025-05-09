@@ -11,7 +11,7 @@
 !/modules/client/
 !/modules/target_tracking
 !/modules/comparing
-
+!/modules/client_comparing
 # Common files to ignore in all modules
 /modules/*/config*.xml
 /modules/*/vendor/
