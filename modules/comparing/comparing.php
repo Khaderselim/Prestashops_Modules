@@ -79,12 +79,27 @@ class Comparing extends Module
         $tab->icon = 'business';
         $tab->add();
 
+        $test = new Tab();
+        $test->active = 1;
+        $test->class_name = 'AdminTestproducts';
+        $test->name = array();
+        foreach (Language::getLanguages(true) as $lang) {
+            $test->name[$lang['id_lang']] = 'Test Products';
+        }
+        $test->id_parent = (int)Tab::getIdFromClassName('AdminComparing');
+        $test->module = $this->name;
+        $test->icon = 'business';
+        $test->add();
+
         return true;
 
     }
 
     public function uninstallTab(){
         $id_tab = (int)Tab::getIdFromClassName('AdminComparingproducts');
+        $tab = new Tab($id_tab);
+        $tab->delete();
+        $id_tab = (int)Tab::getIdFromClassName('AdminTestproducts');
         $tab = new Tab($id_tab);
         $tab->delete();
 
