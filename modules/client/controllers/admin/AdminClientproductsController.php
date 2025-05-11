@@ -893,7 +893,7 @@ class AdminClientproductsController extends ModuleAdminController
     {
         // Get all client products
         $products = Db::getInstance()->executeS('
-            SELECT id_product 
+            SELECT id_client_product 
             FROM `' . _DB_PREFIX_ . 'client_product`
         ');
 
@@ -908,7 +908,7 @@ class AdminClientproductsController extends ModuleAdminController
                 FROM `' . _DB_PREFIX_ . 'competitor_product` cp
                 INNER JOIN `' . _DB_PREFIX_ . 'products_relation` pr
                 ON cp.id_product = pr.id_product_competitor
-                WHERE pr.id_product_client = ' . (int)$product['id_product']
+                WHERE pr.id_product_client = ' . (int)$product['id_client_product']
             );
 
             // Prepare competitor API requests
